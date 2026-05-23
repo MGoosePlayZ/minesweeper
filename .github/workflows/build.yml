@@ -1,0 +1,60 @@
+name: Build Executables
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            artifact_name: minesweeper-linux
+            executable_name: minesweeper
+
+          - os: windows-latest
+            artifact_name: minesweeper-windows
+            executable_name: minesweeper.exe
+
+          - os: macos-latest
+            artifact_name: minesweeper-macos
+            executable_name: minesweeper
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pygame-ce numpy pyinstaller
+
+      - name: Build executable
+        shell: bash
+        run: |
+          ICON_ARG=""
+
+          if [[ "${{ runner.os }}" == "Windows" ]]; then
+            ICON_ARG="--icon icons/icon.ico"
+          elif [[ "${{ runner.os }}" == "macOS" ]]; then
+            ICON_ARG="--icon icons/icon.icns"
+          else
+            ICON_ARG="--icon icons/icon.png"
+          fi
+
+          pyinstaller \
+            --onefile \
+            --windowed \
+            --name minesweeper \
+            $ICON_ARG \
+            main.py
