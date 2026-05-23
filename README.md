@@ -1,5 +1,3 @@
-# Minesweeper
+# Yet Another Mine Sweeoer Clone
 
-Have you ever wanted to do the job that a Mine Kafon Ball can do for you? Have you ever wanted to risk your life for literally no reason? Well that's called masochism.
-
-On an unrelated note, I made a simple minesweeper clone.
+I made a simple minesweeper clone that can be run from the terminal or from a GUI.
