@@ -338,6 +338,8 @@ def get_texture_from_atlas(original_rect_width: int, original_rect_height: int, 
 
 pygame.init()
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+icon_surface = pygame.image.load("icons/icon.png")
+pygame.display.set_icon(icon_surface)
 pygame.display.set_caption("Minesweeper")
 clock = pygame.time.Clock()
 font = pygame.font.Font(None, SCREEN_WIDTH//10)
