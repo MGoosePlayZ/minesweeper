@@ -36,11 +36,7 @@ jobs:
 
       - name: Build executable
         run: |
-          pyinstaller \
-            --onefile \
-            --windowed \
-            --name minesweeper \
-            main.py
+          pyinstaller --onefile --windowed --name minesweeper main.py
 
       - name: Show dist folder
         run: |
